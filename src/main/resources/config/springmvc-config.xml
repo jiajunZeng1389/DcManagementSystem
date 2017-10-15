@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans.xsd
+                     http://www.springframework.org/schema/context
+                     http://www.springframework.org/schema/context/spring-context.xsd
+                     http://www.springframework.org/schema/mvc
+                     http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+    <!-- 扫描controller包 -->
+    <context:component-scan base-package="com.dcglsystem.controller" />
+
+    <!--注解方式的：处理器适配器与映射器 -->
+    <mvc:annotation-driven />
+
+    <!-- （视图解析器，解析jsp，默认使用jstl格式）
+        定义跳转的文件的前后缀 ，视图模式配置-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!-- 1.对静态资源文件的访问 -->
+    <mvc:default-servlet-handler/>
+
+    <!--2.对静态资源文件的访问-->
+    <mvc:resources location="static/js/" mapping="/js/**"/>
+    <mvc:resources location="static/css/" mapping="/css/**"/>
+
+</beans>
